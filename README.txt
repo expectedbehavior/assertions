@@ -21,6 +21,9 @@ including:
   assertions.
 * An assertion that verifies that a given value is false or nil
   (Test::Unit::Assertions#assert_not)
+* Assertions that verify enumerables are sorted
+  (Test::Unit::Assertions#assert_sorted, Test::Unit::Assertions#assert_sorted_desc,
+  Test::Unit::Assertions#assert_sorted_by, Test::Unit::Assertions#assert_sorted_by_desc)
 
 == PROBLEMS:
 None (known).
@@ -69,6 +72,26 @@ None (known).
      assert_fail do
        assert_equal(5, 4)
      end
+
+     #
+     # Verify an enumerable is sorted
+     #
+     assert_sorted([1,2,3])
+
+     #
+     # Verify an enumerable is sorted descending
+     #
+     assert_sorted_desc([3,2,1])
+
+     #
+     # Verify an enumerable is sorted based on a key
+     #
+     assert_sorted_by(:key, [{:key => 1}, {:key => 2}])
+
+     #
+     # Verify an enumerable is sorted descending based on a key
+     #
+     assert_sorted_by(:key, [{:key => 2}, {:key => 1}])
    end
  end
 
@@ -83,6 +106,8 @@ Hoe is required but only for running the tests.
 === Designing Patterns
 * Homepage: http://www.designingpatterns.com
 * Blogs: http://blogs.designingpatterns.com
+=== Expected Behavior
+* Homepage: http://www.expectedbehavior.com/blog
 
 == SUPPORT:
 Please post questions, concerns, or requests for enhancement to the forums on
