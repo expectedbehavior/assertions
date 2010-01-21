@@ -86,6 +86,36 @@ class AssertionsTest < Test::Unit::TestCase
     end
   end
 
+  def test_assert_sorted
+    assert_raise_message("enum must be enumerable", ArgumentError) do
+      assert_sorted 1
+    end
+
+    assert_sorted []
+    assert_sorted [1]
+
+    assert_sorted [1,2,4,8]
+
+    assert_fail do
+      assert_sorted [4,2,1,8], "can you spare some change?"
+    end
+  end
+
+  def test_sorted_desc
+    assert_raise_message("enum must be enumerable", ArgumentError) do
+      assert_sorted_desc 1
+    end
+
+    assert_sorted_desc []
+    assert_sorted_desc [1]
+
+    assert_sorted_desc [8,4,2,1]
+
+    assert_fail do
+      assert_sorted_desc [4,2,1,8], "can you spare some change?"
+    end
+  end
+
   def test_assert_raise_message
     #
     # Verify that the assertion passes correctly.

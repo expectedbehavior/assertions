@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 module Test
 module Unit
 
@@ -116,6 +115,42 @@ module Assertions
   alias assert_ge assert_greater_than_or_equal_to
 
   # 
+  # ====Description:
+  # Will tell you if the elements in an Enum are sorted (ascending)
+  #
+  # ====Example:
+  #  assert_sorted([1,2,3,4])
+  #
+  # ====Parameters:
+  # [arr]
+  #      The array to check for sortedness.
+  # [message = ""]
+  #      An optional additional message that will be displayed if the
+  #      assertion fails.
+  def assert_sorted(enum, message = "")
+    raise ArgumentError.new("enum must be enumerable") unless enum.is_a?(Enumerable)
+    assert_equal enum.clone.sort{|a,b| a <=> b }, enum
+  end
+
+  #
+  # ====Description:
+  # Will tell you if the elements in an Enum are sorted (ascending)
+  #
+  # ====Example:
+  #  assert_sorted_desc([4,3,2,1])
+  #
+  # ====Parameters:
+  # [arr]
+  #      The array to check for sortedness.
+  # [message = ""]
+  #      An optional additional message that will be displayed if the
+  #      assertion fails.
+  def assert_sorted_desc(enum, message = "")
+    raise ArgumentError.new("enum must be enumerable") unless enum.is_a?(Enumerable)
+    assert_equal enum.clone.sort{|a,b| b <=> a }, enum
+  end
+
+  #
   # ====Description:
   # This is a convenience wrapper around assert_operator.  It asserts that
   # lhs < rhs.
