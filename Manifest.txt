@@ -1,0 +1,8 @@
+History.txt
+LICENSE
+Manifest.txt
+README.txt
+Rakefile
+examples/example.rb
+lib/assertions.rb
+test/test_assertions.rb

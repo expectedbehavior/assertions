@@ -1,0 +1,25 @@
+=== 1.4.1 / 2010-01-15
+A couple minor changes were made.
+* Changes to gem specification.
+* Version can be accessed programmatcally from gem.
+
+=== 1.4.0 / 2008-06-27
+Add an Test::Unit::Assertions#assert_not method that verifies that a value is
+false or nil (opposite of the Test::Unit::Assertions#assert method).
+
+=== 1.3.0 / 2008-06-25
+Include an example program.
+
+=== 1.2.0 / 2008-06-12
+Documentation changes.
+
+=== 1.1.0 / 2008-06-08
+Make the failure message when an exception does not have the expected message
+display the expected message and the actual message on top of each other, for
+easy comparisons.
+
+=== 1.0.0 / 2008-06-06
+First production release of assertions; full documentation is provided.
+
+=== 0.9.0 / 2008-06-06
+Initial release of assertions.
