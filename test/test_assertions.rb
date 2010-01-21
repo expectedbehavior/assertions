@@ -4,6 +4,11 @@ require 'assertions'
 
 require 'test/unit'
 
+require 'redgreen'
+
+require 'foo'
+require 'seahawk'
+
 class AssertionsTest < Test::Unit::TestCase
   def test_assert_fail
     #
@@ -113,6 +118,103 @@ class AssertionsTest < Test::Unit::TestCase
 
     assert_fail do
       assert_sorted_desc [4,2,1,8], "can you spare some change?"
+    end
+  end
+
+  def test_assert_sorted_by
+    assert_raise_message("key must be symbol or string", ArgumentError) do
+      assert_sorted_by 12, []
+    end
+
+    assert_raise_message("enum must be enumerable", ArgumentError) do
+      assert_sorted_by :foo, 1
+    end
+
+    assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
+      assert_sorted_by :bar, [{ :bar => 1}, { :cow => 2 }]
+    end
+ 
+    assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
+      assert_sorted_by :bar, [Foo.new(2), Seahawk.new(3)]
+    end
+
+    assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
+      assert_sorted_by :bar, [Foo.new(1), { :moo => 2 }]
+    end
+    
+    assert_sorted_by :bar,  [{:bar => 1},  {:bar => 2},  {:bar => 3}]
+    assert_sorted_by "bar", [{"bar" => 1}, {"bar" => 2}, {"bar" => 3}]
+    
+    assert_fail do
+      assert_sorted_by :bar, [{:bar => 2}, {:bar => 1}, {:bar => 3}]
+    end
+
+    foos = []
+    4.times do |i|
+      foos << Foo.new(i)
+    end
+    assert_sorted_by :bar, foos
+    
+    f = foos[0]
+    foos[0] = foos[1]
+    foos[1] = f
+    
+    assert_fail do
+      assert_sorted_by :bar, foos
+    end
+
+    assert_sorted_by :bar, [{ :bar => 1}, Foo.new(2)]
+    assert_fail do
+      assert_sorted_by :bar, [Foo.new(2), { :bar => 1}]
+    end
+  end
+
+  def test_assert_sorted_by_desc
+    assert_raise_message("key must be symbol or string", ArgumentError) do
+      assert_sorted_by_desc 12, []
+    end
+
+    assert_raise_message("enum must be enumerable", ArgumentError) do
+      assert_sorted_by_desc :foo, 1
+    end
+
+    assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
+      assert_sorted_by_desc :bar, [{ :bar => 2}, { :cow => 1 }]
+    end
+ 
+    assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
+      assert_sorted_by_desc :bar, [Foo.new(3), Seahawk.new(2)]
+    end
+
+    assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
+      assert_sorted_by_desc :bar, [Foo.new(2), { :moo => 1 }]
+    end
+    
+    assert_sorted_by_desc :bar,  [{:bar => 3},  {:bar => 2},  {:bar => 1}]
+    assert_sorted_by_desc "bar", [{"bar" => 3}, {"bar" => 2}, {"bar" => 1}]
+    
+    assert_fail do
+      assert_sorted_by_desc :bar, [{:bar => 2}, {:bar => 1}, {:bar => 3}]
+    end
+
+    foos = []
+    4.times do |i|
+      foos << Foo.new(i)
+    end
+    foos.reverse!
+    assert_sorted_by_desc :bar, foos
+    
+    f = foos[0]
+    foos[0] = foos[1]
+    foos[1] = f
+    
+    assert_fail do
+      assert_sorted_by_desc :bar, foos
+    end
+
+    assert_sorted_by_desc :bar, [{ :bar => 2}, Foo.new(1)]
+    assert_fail do
+      assert_sorted_by_desc :bar, [Foo.new(1), { :bar => 2}]
     end
   end
 

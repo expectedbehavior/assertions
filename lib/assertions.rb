@@ -122,8 +122,8 @@ module Assertions
   #  assert_sorted([1,2,3,4])
   #
   # ====Parameters:
-  # [arr]
-  #      The array to check for sortedness.
+  # [enum]
+  #      The enumeration to check for sortedness.
   # [message = ""]
   #      An optional additional message that will be displayed if the
   #      assertion fails.
@@ -140,8 +140,8 @@ module Assertions
   #  assert_sorted_desc([4,3,2,1])
   #
   # ====Parameters:
-  # [arr]
-  #      The array to check for sortedness.
+  # [enum]
+  #      The enumeration to check for sortedness.
   # [message = ""]
   #      An optional additional message that will be displayed if the
   #      assertion fails.
@@ -150,6 +150,59 @@ module Assertions
     assert_equal enum.clone.sort{|a,b| b <=> a }, enum
   end
 
+
+  private
+  def check_enum_for_key_sortability(key, enum)
+    raise ArgumentError.new("key must be symbol or string") unless (key.is_a?(String) || key.is_a?(Symbol))
+    raise ArgumentError.new("enum must be enumerable") unless enum.is_a?(Enumerable)
+    raise ArgumentError.new("enum's elements don't respond to the key") unless enum.all?{ |x| (x.is_a?(Hash) && x.has_key?(key)) || x.respond_to?(key) }    
+  end
+
+  public
+  # 
+  # ====Description:
+  # Will tell you if the elements in an Enum are sorted (ascending)
+  # based on a key corresponding to a key in a hash or method on a
+  # class.
+  #
+  # ====Example:
+  #  assert_sorted_by :bar, [{:bar => 1}, {:bar => 2}]
+  #
+  # ====Parameters:
+  # [key]
+  #      A string or symbol to use to get a value on an object in 'enum'
+  # [enum]
+  #      The enumeration to check for sortedness.
+  # [message = ""]
+  #      An optional additional message that will be displayed if the
+  #      assertion fails.
+  def assert_sorted_by(key, enum, message = "")
+    check_enum_for_key_sortability(key, enum)
+    assert_sorted enum.map{ |x| x.is_a?(Hash) ? x[key] : x.send(key) }
+  end
+  
+  # 
+  # ====Description:
+  # Will tell you if the elements in an Enum are sorted (descending)
+  # based on a key corresponding to a key in a hash or method on a
+  # class.
+  #
+  # ====Example:
+  #  assert_sorted_by_desc :bar, [{:bar => 2}, {:bar => 1}]
+  #
+  # ====Parameters:
+  # [key]
+  #      A string or symbol to use to get a value on an object in 'enum'
+  # [enum]
+  #      The enumeration to check for sortedness.
+  # [message = ""]
+  #      An optional additional message that will be displayed if the
+  #      assertion fails.
+  def assert_sorted_by_desc(key, enum, message = "")
+    check_enum_for_key_sortability(key, enum)
+    assert_sorted_desc enum.map{ |x| x.is_a?(Hash) ? x[key] : x.send(key) }
+  end
+  
   #
   # ====Description:
   # This is a convenience wrapper around assert_operator.  It asserts that
