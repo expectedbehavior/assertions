@@ -40,5 +40,25 @@ class Tests < Test::Unit::TestCase
     assert_fail do
       assert_equal(5, 4)
     end
+
+    #
+    # Verify an enumerable is sorted
+    #
+    assert_sorted([1,2,3])
+
+    #
+    # Verify an enumerable is sorted descending
+    #
+    assert_sorted_desc([3,2,1])
+
+    #
+    # Verify an enumerable is sorted based on a key
+    #
+    assert_sorted_by(:key, [{:key => 1}, {:key => 2}])
+
+    #
+    # Verify an enumerable is sorted descending based on a key
+    #
+    assert_sorted_by(:key, [{:key => 2}, {:key => 1}])
   end
 end
