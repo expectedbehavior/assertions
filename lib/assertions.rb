@@ -202,6 +202,37 @@ module Assertions
     check_enum_for_key_sortability(key, enum)
     assert_sorted_desc enum.map{ |x| x.is_a?(Hash) ? x[key] : x.send(key) }
   end
+
+  #
+  # ====Description:
+  # Find out if a something is between two other things when compared.
+  # It asserts that lhs1 < rhs < lhs2 or lhs1 > rhs > lhs2
+  #
+  # ====Example:
+  #  assert_between(Date.yesterday, Date.tomorrow, Date.today)
+  #
+  # ====Parameters:
+  # [lhs1]
+  #      One of the things to compare against
+  # [lhs2]
+  #      The other thing to compare against
+  # [rhs]
+  #      The thing being tested for between-ness
+  # [message = ""]
+  #      An optional additional message that will be displayed if the
+  #      assertion fails.
+  #
+  def assert_between(lhs1, lhs2, rhs, message="")
+    if lhs1 == lhs2
+      full_message = build_message(message, "Gave the same value for both sides of range. <?> was not equal to <?>", rhs, lhs1)
+      assert_block(full_message) { lhs1 == rhs }
+    else
+      lower  = lhs1 < lhs2 ? lhs1 : lhs2
+      higher = lhs1 < lhs2 ? lhs2 : lhs1
+      full_message = build_message(message, "<?> was not between <?> and <?>", rhs, lower, higher)
+      assert_block(full_message) { lower < rhs && rhs < higher }
+    end
+  end
   
   #
   # ====Description:

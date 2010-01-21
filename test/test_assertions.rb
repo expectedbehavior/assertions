@@ -218,6 +218,32 @@ class AssertionsTest < Test::Unit::TestCase
     end
   end
 
+  def test_assert_between
+    assert_raise_message("Gave the same value for both sides of range. <5> was not equal to <4>", Test::Unit::AssertionFailedError) do
+      assert_between 4, 4, 5
+    end
+
+    assert_raise_message("<5> was not between <2> and <3>", Test::Unit::AssertionFailedError) do
+      assert_between 3, 2, 5
+    end
+    
+    assert_between 4, 8, 6
+    assert_between 8, 4, 6
+    assert_fail do
+      assert_between 4, 6, 8
+    end
+    
+    today     = DateTime.now
+    yesterday = today - 1
+    tomorrow  = today + 1
+    assert_between yesterday, tomorrow,  today
+    assert_between tomorrow,  yesterday, today
+    
+    assert_fail do
+      assert_between tomorrow, today, yesterday
+    end
+  end
+  
   def test_assert_raise_message
     #
     # Verify that the assertion passes correctly.

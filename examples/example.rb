@@ -44,12 +44,12 @@ class Tests < Test::Unit::TestCase
     #
     # Verify an enumerable is sorted
     #
-    assert_sorted([1,2,3])
+    assert_sorted([1, 2, 3])
 
     #
     # Verify an enumerable is sorted descending
     #
-    assert_sorted_desc([3,2,1])
+    assert_sorted_desc([3, 2, 1])
 
     #
     # Verify an enumerable is sorted based on a key
@@ -60,5 +60,10 @@ class Tests < Test::Unit::TestCase
     # Verify an enumerable is sorted descending based on a key
     #
     assert_sorted_by(:key, [{:key => 2}, {:key => 1}])
+    
+    #
+    # Verify a thing is between two other things
+    #
+    assert_between(1, 3, 2)
   end
 end
