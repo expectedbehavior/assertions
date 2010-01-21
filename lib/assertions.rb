@@ -117,25 +117,6 @@ module Assertions
 
   # 
   # ====Description:
-  # Will tell you if the elements in an Enum are sorted the way you want
-  # them to be.
-  # 
-  # ====Example:
-  #  assert_sorted(array, :desc)
-  #
-  # ====Parameters:
-  # [arr]
-  #      The array to check for sortedness.
-  # [order = :asc]
-  #      The direction in which 'arr' should be sorted
-  # 
-  def assert_sorted(lhs, rhs, message = "")\
-    assert_operator(lhs, :<, rhs, message)
-  end
-  alias assert_lt assert_less_than
-
-  # 
-  # ====Description:
   # This is a convenience wrapper around assert_operator.  It asserts that
   # lhs < rhs.
   # 
