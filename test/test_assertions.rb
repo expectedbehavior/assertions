@@ -101,7 +101,7 @@ class AssertionsTest < Test::Unit::TestCase
     end
   end
 
-  def test_sorted_desc
+  def test_assert_sorted_desc
     assert_raise_message("enum must be enumerable", ArgumentError) do
       assert_sorted_desc 1
     end
