@@ -1,11 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'assertions'
-
 require 'test/unit'
-
 require 'redgreen'
-
 require 'foo'
 require 'seahawk'
 
@@ -46,6 +43,40 @@ class AssertionsTest < Test::Unit::TestCase
 
     assert_fail do
       assert_not(5)
+    end
+  end
+
+  def test_assert_positive
+    assert_positive(1)
+    assert_positive(1.0)
+
+    assert_fail do
+      assert_positive(0)
+    end
+
+    assert_fail do
+      assert_positive(-1)
+    end
+
+    assert_fail do
+      assert_positive(-1.0)
+    end
+  end
+
+  def test_assert_negative
+    assert_negative(-1)
+    assert_negative(-1.0)
+
+    assert_fail do
+      assert_negative(0)
+    end
+
+    assert_fail do
+      assert_negative(1)
+    end
+
+    assert_fail do
+      assert_negative(1.0)
     end
   end
 
@@ -226,21 +257,21 @@ class AssertionsTest < Test::Unit::TestCase
     assert_raise_message("<5> was not between <2> and <3>", Test::Unit::AssertionFailedError) do
       assert_between 3, 2, 5
     end
-    
+
     assert_between 4, 8, 6
     assert_between 8, 4, 6
     assert_fail do
       assert_between 4, 6, 8
     end
-    
-    today     = DateTime.now
-    yesterday = today - 1
-    tomorrow  = today + 1
-    assert_between yesterday, tomorrow,  today
-    assert_between tomorrow,  yesterday, today
+
+    now    = Time.now
+    before = now - 1
+    after  = now + 1
+    assert_between before, after,  now
+    assert_between after,  before, now
     
     assert_fail do
-      assert_between tomorrow, today, yesterday
+      assert_between after, now, before
     end
   end
   

@@ -70,6 +70,44 @@ module Assertions
     end
   end
 
+  #
+  # ====Description:
+  # This is a convenience wrapper around assert_operator.  It asserts that
+  # the value is greater than zero
+  #
+  # ====Example:
+  #  assert_positive(12)
+  #
+  # ====Parameters:
+  # [value]
+  #      The number whose positiveness we wish to determine
+  # [message = ""]
+  #      An optional additional message that will be displayed if the
+  #      assertion fails.
+  #
+  def assert_positive(value, message = "")
+    assert_operator(value, :>, 0, message)
+  end
+
+  #
+  # ====Description:
+  # This is a convenience wrapper around assert_operator.  It asserts that
+  # the value is less than zero
+  #
+  # ====Example:
+  #  assert_negative(-5)
+  #
+  # ====Parameters:
+  # [value]
+  #      The number whose negativeness we wish to determine
+  # [message = ""]
+  #      An optional additional message that will be displayed if the
+  #      assertion fails.
+  #
+  def assert_negative(value, message = "")
+    assert_operator(value, :<, 0, message)
+  end
+
   # 
   # ====Description:
   # This is a convenience wrapper around assert_operator.  It asserts that
