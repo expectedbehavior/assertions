@@ -59,15 +59,12 @@ module Assertions
   #      assertion fails.
   # 
   def assert_not(boolean, message = "")
-    _wrap_assertion do
-      full_message = build_message(message,
-                                   "<?> incorrectly is true.",
-                                   boolean)
-
-      assert_block(full_message) do
-        !boolean
-      end
-    end
+    full_message = build_message(message,
+                                 "<?> incorrectly is true.",
+                                 boolean)
+    assert_block(full_message) do
+          !boolean
+        end
   end
 
   #
