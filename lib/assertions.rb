@@ -258,7 +258,7 @@ module Assertions
   def assert_between(lhs1, lhs2, rhs, message="")
     if lhs1 == lhs2
       full_message = build_message(message, "Gave the same value for both sides of range. <?> was not equal to <?>", rhs, lhs1)
-      puts "\n***Full Message #{full_message}\n"
+
       assert_block(full_message) { lhs1 == rhs }
     else
       lower  = lhs1 < lhs2 ? lhs1 : lhs2
