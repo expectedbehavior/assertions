@@ -31,20 +31,18 @@ module Assertions
   #      This block should contain an assertion that fails.
   # 
   def assert_fail(message = "", &block)
-    _wrap_assertion do
-      full_message = build_message(message,
-                                   "Failed assertion was expected, but it did not occur.")
+    full_message = build_message(message,
+                                 "Failed assertion was expected, but it did not occur.")
 
-      assert_block(full_message) do
-        begin
-          yield
-          false
-        rescue AssertionFailedError => e
-          print("Assertion correctly failed:\n#{e.message}\n")
-          true
+    assert_block(full_message) do
+          begin
+            yield
+            false
+          rescue AssertionFailedError => e
+            print("Assertion correctly failed:\n#{e.message}\n")
+            true
+          end
         end
-      end
-    end
   end
 
   # 
@@ -260,6 +258,7 @@ module Assertions
   def assert_between(lhs1, lhs2, rhs, message="")
     if lhs1 == lhs2
       full_message = build_message(message, "Gave the same value for both sides of range. <?> was not equal to <?>", rhs, lhs1)
+      puts "\n***Full Message #{full_message}\n"
       assert_block(full_message) { lhs1 == rhs }
     else
       lower  = lhs1 < lhs2 ? lhs1 : lhs2
@@ -341,55 +340,38 @@ module Assertions
                            expected_exception_class,
                            message = "",
                            &block)
-    _wrap_assertion do
-      full_message = build_message(message,
-                                   "<?> exception expected but none was thrown.",
-                                   expected_exception_class)
-      actual_exception = nil
-      assert_block(full_message) do
-        begin
-          yield
-          false
-        rescue Exception => e
-          actual_exception = e
-          true
+    full_message = build_message(message,
+                                 "<?> exception expected but none was thrown.",
+                                 expected_exception_class)
+    actual_exception = nil
+    assert_block(full_message) do
+          begin
+            yield
+            false
+          rescue Exception => e
+            actual_exception = e
+            true
+          end
         end
-      end
 
-      full_message = build_message(message,
-                                   "<?> exception expected but was\n?",
-                                   expected_exception_class,
-                                   actual_exception)
+    full_message = build_message(message,
+                                 "<?> exception expected but was\n?",
+                                 expected_exception_class,
+                                 actual_exception)
 
-      assert_block(full_message) do
-        actual_exception.is_a?(expected_exception_class)
-      end
+    assert_block(full_message) do
+          actual_exception.is_a?(expected_exception_class)
+        end
 
-      full_message = build_message(message,
-                                   "<?> exception message expected but was\n<?>",
-                                   expected_exception_message,
-                                   actual_exception.message)
-      assert_block(full_message) do
-        expected_exception_message == actual_exception.message
-      end
-    end
+    full_message = build_message(message,
+                                 "<?> exception message expected but was\n<?>",
+                                 expected_exception_message,
+                                 actual_exception.message)
+    assert_block(full_message) do
+          expected_exception_message == actual_exception.message
+        end
   end
 
-  private
-  def _wrap_assertion
-    @_assertion_wrapped ||= false
-    unless (@_assertion_wrapped)
-      @_assertion_wrapped = true
-      begin
-        add_assertion
-        return yield
-      ensure
-        @_assertion_wrapped = false
-      end
-    else
-      return yield
-    end
-  end
 end
 end
 end
