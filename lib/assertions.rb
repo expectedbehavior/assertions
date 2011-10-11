@@ -378,6 +378,21 @@ module Assertions
     end
   end
 
+  private
+  def _wrap_assertion
+    @_assertion_wrapped ||= false
+    unless (@_assertion_wrapped)
+      @_assertion_wrapped = true
+      begin
+        add_assertion
+        return yield
+      ensure
+        @_assertion_wrapped = false
+      end
+    else
+      return yield
+    end
+  end
 end
 end
 end
