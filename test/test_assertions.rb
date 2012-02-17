@@ -1,10 +1,17 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.push(File.expand_path "../../test", __FILE__)
 
-require 'assertions'
-require 'test/unit'
-require 'foo'
-require 'seahawk'
+require "test/unit"
+require "assertions"
+require "foo"
+require "seahawk"
+
+# 1.9 compatibility patch for test unit
+module Test
+  module Unit
+    AssertionFailedError = MiniTest::Assertion if defined?(MiniTest) && !defined?(AssertionFailedError)
+  end
+end
 
 class AssertionsTest < Test::Unit::TestCase
   def test_assert_fail
