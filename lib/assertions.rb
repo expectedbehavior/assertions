@@ -39,7 +39,6 @@ module Assertions
             yield
             false
           rescue AssertionFailedError => e
-            print("Assertion correctly failed:\n#{e.message}\n")
             true
           end
         end
