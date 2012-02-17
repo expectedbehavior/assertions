@@ -15,25 +15,25 @@ class Tests < Test::Unit::TestCase
     # Verify that 4 < 5
     #
     assert_less_than(4, 5)
-    
+
     #
     # Verify that 4 < 5 again, but this time with the
     # shorter alias.
     #
     assert_lt(4, 5)
-    
+
     #
     # Verify that 5 >= 5
     #
     assert_ge(5, 5)
-    
+
     #
     # Verify that the specified exception is raised.
     #
     assert_raise_message("Hello, exception!", RuntimeError) do
       raise "Hello, exception!"
     end
-    
+
     #
     # Verify that an assertion failed.
     #
@@ -60,7 +60,7 @@ class Tests < Test::Unit::TestCase
     # Verify an enumerable is sorted descending based on a key
     #
     assert_sorted_by(:key, [{:key => 2}, {:key => 1}])
-    
+
     #
     # Verify a thing is between two other things
     #

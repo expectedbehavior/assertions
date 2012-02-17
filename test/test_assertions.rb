@@ -36,7 +36,7 @@ class AssertionsTest < Test::Unit::TestCase
   def test_assert_not
     assert_not(false)
     assert_not(nil)
-    
+
     assert_fail do
       assert_not(true)
     end
@@ -164,7 +164,7 @@ class AssertionsTest < Test::Unit::TestCase
     assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
       assert_sorted_by :bar, [{ :bar => 1}, { :cow => 2 }]
     end
- 
+
     assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
       assert_sorted_by :bar, [Foo.new(2), Seahawk.new(3)]
     end
@@ -172,10 +172,10 @@ class AssertionsTest < Test::Unit::TestCase
     assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
       assert_sorted_by :bar, [Foo.new(1), { :moo => 2 }]
     end
-    
+
     assert_sorted_by :bar,  [{:bar => 1},  {:bar => 2},  {:bar => 3}]
     assert_sorted_by "bar", [{"bar" => 1}, {"bar" => 2}, {"bar" => 3}]
-    
+
     assert_fail do
       assert_sorted_by :bar, [{:bar => 2}, {:bar => 1}, {:bar => 3}]
     end
@@ -185,11 +185,11 @@ class AssertionsTest < Test::Unit::TestCase
       foos << Foo.new(i)
     end
     assert_sorted_by :bar, foos
-    
+
     f = foos[0]
     foos[0] = foos[1]
     foos[1] = f
-    
+
     assert_fail do
       assert_sorted_by :bar, foos
     end
@@ -212,7 +212,7 @@ class AssertionsTest < Test::Unit::TestCase
     assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
       assert_sorted_by_desc :bar, [{ :bar => 2}, { :cow => 1 }]
     end
- 
+
     assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
       assert_sorted_by_desc :bar, [Foo.new(3), Seahawk.new(2)]
     end
@@ -220,10 +220,10 @@ class AssertionsTest < Test::Unit::TestCase
     assert_raise_message("enum's elements don't respond to the key", ArgumentError) do
       assert_sorted_by_desc :bar, [Foo.new(2), { :moo => 1 }]
     end
-    
+
     assert_sorted_by_desc :bar,  [{:bar => 3},  {:bar => 2},  {:bar => 1}]
     assert_sorted_by_desc "bar", [{"bar" => 3}, {"bar" => 2}, {"bar" => 1}]
-    
+
     assert_fail do
       assert_sorted_by_desc :bar, [{:bar => 2}, {:bar => 1}, {:bar => 3}]
     end
@@ -234,11 +234,11 @@ class AssertionsTest < Test::Unit::TestCase
     end
     foos.reverse!
     assert_sorted_by_desc :bar, foos
-    
+
     f = foos[0]
     foos[0] = foos[1]
     foos[1] = f
-    
+
     assert_fail do
       assert_sorted_by_desc :bar, foos
     end
@@ -269,12 +269,12 @@ class AssertionsTest < Test::Unit::TestCase
     after  = now + 1
     assert_between before, after,  now
     assert_between after,  before, now
-    
+
     assert_fail do
       assert_between after, now, before
     end
   end
-  
+
   def test_assert_raise_message
     #
     # Verify that the assertion passes correctly.

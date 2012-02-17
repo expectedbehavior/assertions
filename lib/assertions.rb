@@ -10,14 +10,14 @@ module Unit
 module Assertions
   public
 
-  # 
+  #
   # ====Description:
   # This assertion passes if and only if block contains an assertion
   # that fails (but which is suppressed from propagating outside of
   # block and so will not cause the test to fail).
   # If the assertion passes, the failed assertion is written to
   # stdout.  This method is (only?) useful when testing other assertions.
-  # 
+  #
   # ====Example:
   #  assert_fail do
   #    assert_equal(5, 4)
@@ -29,7 +29,7 @@ module Assertions
   #      assertion fails.
   # [&block]
   #      This block should contain an assertion that fails.
-  # 
+  #
   def assert_fail(message = "", &block)
     _wrap_assertion do
       full_message = build_message(message,
@@ -47,17 +47,17 @@ module Assertions
     end
   end
 
-  # 
+  #
   # ====Description:
   # This assertion passes if and only if boolean is false or nil.
-  # 
+  #
   # ====Parameters:
   # [boolean]
   #      This must be false or nil or the assertion to pass
   # [message = ""]
   #      An optional additional message that will be displayed if the
   #      assertion fails.
-  # 
+  #
   def assert_not(boolean, message = "")
     _wrap_assertion do
       full_message = build_message(message,
@@ -108,11 +108,11 @@ module Assertions
     assert_operator(value, :<, 0, message)
   end
 
-  # 
+  #
   # ====Description:
   # This is a convenience wrapper around assert_operator.  It asserts that
   # lhs > rhs.
-  # 
+  #
   # ====Example:
   #  assert_greater_than(5, 4)
   #
@@ -124,17 +124,17 @@ module Assertions
   # [message = ""]
   #      An optional additional message that will be displayed if the
   #      assertion fails.
-  # 
+  #
   def assert_greater_than(lhs, rhs, message = "")
     assert_operator(lhs, :>, rhs, message)
   end
   alias assert_gt assert_greater_than
 
-  # 
+  #
   # ====Description:
   # This is a convenience wrapper around assert_operator.  It asserts that
   # lhs >= rhs.
-  # 
+  #
   # ====Example:
   #  assert_greater_than_or_equal_to(5, 5)
   #
@@ -146,13 +146,13 @@ module Assertions
   # [message = ""]
   #      An optional additional message that will be displayed if the
   #      assertion fails.
-  # 
+  #
   def assert_greater_than_or_equal_to(lhs, rhs, message = "")
     assert_operator(lhs, :>=, rhs, message)
   end
   alias assert_ge assert_greater_than_or_equal_to
 
-  # 
+  #
   # ====Description:
   # Will tell you if the elements in an Enum are sorted (ascending)
   #
@@ -193,11 +193,11 @@ module Assertions
   def check_enum_for_key_sortability(key, enum)
     raise ArgumentError.new("key must be symbol or string") unless (key.is_a?(String) || key.is_a?(Symbol))
     raise ArgumentError.new("enum must be enumerable") unless enum.is_a?(Enumerable)
-    raise ArgumentError.new("enum's elements don't respond to the key") unless enum.all?{ |x| (x.is_a?(Hash) && x.has_key?(key)) || x.respond_to?(key) }    
+    raise ArgumentError.new("enum's elements don't respond to the key") unless enum.all?{ |x| (x.is_a?(Hash) && x.has_key?(key)) || x.respond_to?(key) }
   end
 
   public
-  # 
+  #
   # ====Description:
   # Will tell you if the elements in an Enum are sorted (ascending)
   # based on a key corresponding to a key in a hash or method on a
@@ -218,8 +218,8 @@ module Assertions
     check_enum_for_key_sortability(key, enum)
     assert_sorted enum.map{ |x| x.is_a?(Hash) ? x[key] : x.send(key) }
   end
-  
-  # 
+
+  #
   # ====Description:
   # Will tell you if the elements in an Enum are sorted (descending)
   # based on a key corresponding to a key in a hash or method on a
@@ -271,12 +271,12 @@ module Assertions
       assert_block(full_message) { lower < rhs && rhs < higher }
     end
   end
-  
+
   #
   # ====Description:
   # This is a convenience wrapper around assert_operator.  It asserts that
   # lhs < rhs.
-  # 
+  #
   # ====Example:
   #  assert_less_than(4, 5)
   #
@@ -288,17 +288,17 @@ module Assertions
   # [message = ""]
   #      An optional additional message that will be displayed if the
   #      assertion fails.
-  # 
+  #
   def assert_less_than(lhs, rhs, message = "")\
     assert_operator(lhs, :<, rhs, message)
   end
   alias assert_lt assert_less_than
 
-  # 
+  #
   # ====Description:
   # This is a convenience wrapper around assert_operator.  It asserts that
   # lhs <= rhs.
-  # 
+  #
   # ====Example:
   #  assert_less_than_or_equal_to(4, 4)
   #
@@ -310,18 +310,18 @@ module Assertions
   # [message = ""]
   #      An optional additional message that will be displayed if the
   #      assertion fails.
-  # 
+  #
   def assert_less_than_or_equal_to(lhs, rhs, message = "")
     assert_operator(lhs, :<=, rhs, message)
   end
   alias assert_le assert_less_than_or_equal_to
 
-  # 
+  #
   # ====Description:
   # This assertion passes if and only if block throws an exception of
   # class (or descended from class) expected_exception_class with
   # message expected_exception_message.
-  # 
+  #
   # ====Example:
   #  assert_raise_message("Hello, exception!", RuntimeError) do
   #    raise "Hello, exception!"
