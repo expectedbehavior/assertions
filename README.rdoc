@@ -99,58 +99,30 @@ None (known).
  end
 
 
-== REQUIREMENTS:
-Hoe is required but only for running the tests.
-
 == INSTALL:
- sudo gem install assertions
+ gem install assertions
 
 == AUTHORS:
 === Designing Patterns
 * Homepage: http://www.designingpatterns.com
 * Blogs: http://blogs.designingpatterns.com
 === Expected Behavior
-* Homepage: http://www.expectedbehavior.com/blog
+* http://www.expectedbehavior.com
 
-== SUPPORT:
-Please post questions, concerns, or requests for enhancement to the forums on
-the project page.  Alternatively, direct contact information for
-Designing Patterns can be found on the project page for this gem.
+== Contributing
 
-== ENHANCEMENTS:
-Please feel free to contact us with any ideas; we will try our best to
-enhance the software and respond to user requests.  Of course, we are more
-likely to work on a particular enhancement if we know that there are users
-who want it.  Designing Patterns provides contracting and consulting services,
-so if there is an enhancement that *must* get done (and in a specified time
-frame), please inquire about retaining our services!
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
-== LICENSE:
-The license text can be found in the +LICENSE+ file at the root of the
-distribution.
+== Meta
 
-This  package is licensed with an MIT license:
+Originally Created by Designing Patterns
 
-Copyright (c) 2008-2009 Designing Patterns
+Maintained by Expected Behavior
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Released under the MIT license. http://github.com/expected-behavior/assertions
 
 == SHARE AND ENJOY!
-
