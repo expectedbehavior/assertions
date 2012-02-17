@@ -4,7 +4,9 @@ require "assertions/version"
 
 Gem::Specification.new do |gem|
   gem.authors     = ["DesigningPatterns", "Expected Behavior"]
-  gem.email       = ["technical.inquiries@designingpatterns.com", "joel@expectedbehavior.com"]
+  gem.email       = ["technical.inquiries@designingpatterns.com",
+                     "joel@expectedbehavior.com",
+                     "chris@monoclesoftware.com"]
   gem.description = %{This project adds some additional assertions to Test::Unit::Assertions, including assert_raise_message (allowing verification of error messages) and assert_greater_than.}
   gem.summary     = "More Assertions for Test::Unit::Assertions"
   gem.homepage    = "http://www.expectedbehavior.com"
