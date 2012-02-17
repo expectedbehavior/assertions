@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
+$LOAD_PATH.push(File.expand_path "../../test", __FILE__)
 
 require 'assertions'
 require 'test/unit'
-require 'redgreen'
 require 'foo'
 require 'seahawk'
 
