@@ -1,0 +1,2 @@
+#!ruby
+require "assertions"
